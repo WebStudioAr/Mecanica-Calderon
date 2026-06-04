@@ -714,18 +714,19 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 0.95;
   backdrop-filter: blur(14px);
   transform: translateY(-100%);
   transition: transform .5s cubic-bezier(.7,0,.2,1);
-  display: flex; flex-direction: column; justify-content: center; gap: 8px;
-  padding: 80px 32px 40px;
-  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  padding: 88px 26px 32px;
+  overflow-y: auto;            /* si no entra, hace scroll en vez de recortar */
+  -webkit-overflow-scrolling: touch;
 }
 .drawer.open { transform: translateY(0); }
 .drawer a:not(.btn) {
-  font-family: var(--f-display); font-size: 2.4rem; text-transform: uppercase;
-  color: var(--ink); padding: 12px 0; border-bottom: 1px solid var(--glass-line);
+  font-family: var(--f-display); font-size: 1.85rem; text-transform: uppercase;
+  color: var(--ink); padding: 11px 0; border-bottom: 1px solid var(--glass-line);
   transition: color .25s, padding-left .25s;
 }
-.drawer a:not(.btn):hover { color: var(--red-bright); padding-left: 14px; }
-.drawer .btn { margin-top: 26px; }
+.drawer a:not(.btn):active { color: var(--red-bright); padding-left: 14px; }
+.drawer .btn { margin-top: 22px; width: 100%; }
 
 /* ============================================================
    Floating WhatsApp
@@ -1146,8 +1147,8 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .contact-info { padding: 38px 26px; }
   .pad, .pad-lg { padding: 78px 0; }
   .hero { padding: 110px 0 60px; }
-  .hero-cta { width: 100%; }
-  .hero-cta .btn { flex: 1; min-width: 0; }
+  .hero-cta { width: 100%; flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-cta .btn { width: 100%; }
   .footer-top { grid-template-columns: 1fr; gap: 30px; }
   .wa-float .lbl { display: none; }
   .wa-float { padding: 14px; }
@@ -1498,8 +1499,36 @@ img, video, image-slot, iframe { max-width: 100%; }
   .hero h1 { font-size: clamp(2.5rem, 11vw, 3.2rem); }
   .qs-title { font-size: clamp(2rem, 9vw, 2.6rem); }
   .gallery image-slot { height: 210px !important; }
-  .btn-lg { padding: 14px 18px; }
+  .btn-lg { padding: 16px 20px; }
   .hero-badges { gap: 10px; }
+}
+
+/* ============================================================
+   PULIDO MÓVIL — acabado profesional (botones, CTAs, banners)
+   ============================================================ */
+@media (max-width: 760px) {
+  /* Botones cómodos al tacto y nunca recortados */
+  .btn { min-height: 50px; }
+  .btn-lg { font-size: 1.02rem; letter-spacing: 0.05em; }
+
+  /* Banner "Service Rápido": apila prolijo y CTA a ancho completo */
+  .svc-banner { padding: 24px 22px; gap: 18px; }
+  .svc-banner-left { gap: 16px; width: 100%; }
+  .svc-banner .btn { width: 100%; flex: 1 0 100%; }
+
+  /* CTA dentro de servicios / contacto a ancho completo */
+  .svc-banner, .contact-info .btn { width: 100%; }
+
+  /* Badges del hero: que ocupen toda la fila de forma pareja */
+  .hero-badges { gap: 10px 10px; }
+  .badge { flex: 1 1 calc(50% - 10px); justify-content: center; }
+}
+
+@media (max-width: 400px) {
+  /* Teléfonos angostos: el logo nunca aprieta a la hamburguesa */
+  .brand-mark { width: 38px; height: 38px; font-size: 1.3rem; }
+  .brand-name { font-size: 1.3rem; }
+  .badge { padding: 10px 12px; font-size: 0.8rem; }
 }
 
 /* ============================================================
